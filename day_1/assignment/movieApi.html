@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        
+        .header{
+            background-color: yellow;
+            box-shadow: silver;
+            border: 1px solid black;
+            height: 50px;
+            border-radius: 4px;
+            
+        }
+        .header>a{
+            
+            margin-left: 20%;
+            font-size: larger;
+            font-family: sans-serif;
+            
+            
+        }
+        #boxes{
+            display: grid;
+            grid-gap: 5%;
+            grid-template-columns: 15% 60% 15%;
+
+        }
+        #boxes>a{
+            text-align: center;
+            font-size: 50%;
+        }
+        #tags{
+            
+           display: grid;
+           grid-template-columns: 100%;
+        }
+        #search{
+            background-color: black;
+            display: flex;
+            justify-content: center;
+        }
+        #options{
+           
+        }
+        #button{
+            background-color: yellow;
+            width: 50px;
+            border-radius: 50%;
+        }
+        #details{
+            margin-left: 20%;
+            width: 60%;
+            background-color: black;
+        }
+        p{
+            color: white;
+            text-align: center;
+        }
+        img{
+            margin-left: 35%;
+            margin-top: 20px;
+            width: 30%;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <a href="#">Home</a>
+        <a href="#">New Launches</a>
+        <a href="#">Book a seat</a>
+    </div>
+    <div id="boxes">
+<div id="tags">
+    <a href="#">Home</a>
+<a href="#">Login</a>
+<a href="#">Sign up</a></div>
+<div id="search">
+<input id="searchmovie" type="text" placeholder="type a movie here">
+<button onclick="checkMovie()" id="button">
+<span class="material-icons">
+    search
+</span>
+</button>
+</div>
+<div id="options"></div>
+</div>
+<div style="clear: both;"></div>
+<div id="details"></div>
+</body>
+</html>
+<script>
+    let divMain=document.getElementById('details');
+    async function checkMovie(){
+        divMain.innerText=null;
+        try{
+        let  name= document.getElementById("searchmovie").value;
+        let movie = await fetch(`http://www.omdbapi.com/?t=${name}&apikey=14b1e5d7`);
+        let data = await movie.json();
+        console.log("data:",data);
+        if(data.Response=="True"){
+        let img=document.createElement('img');
+        img.src=data.Poster;
+        let title=document.createElement('p');
+        title.innerText=data.Title;
+        let date = document.createElement('p');
+            date.innerText = data.Year;
+            let rating = document.createElement('p');
+            rating.innerText = data.imdbRating;
+        divMain.append(img,title,date,rating)
+        if(data.imdbRating>8.5){
+            divMain.innerText=null;
+            let reco=document.createElement("p");
+            reco.innerText=`(Recommended)`;
+            divMain.append(img,title,date,rating,reco);
+        }
+        }else{
+            let img1 = document.createElement('img');
+            img1.src = "https://c.tenor.com/IHdlTRsmcS4AAAAM/404.gif";
+            divMain.append(img1);
+        }
+        }
+        catch(err){
+            console.log(err);
+        }
+    }
+    
+</script>

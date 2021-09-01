@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input id="city" placeholder="Enter city" type="text">
+    <button onclick="checkWeather()">Enter</button>
+</body>
+</html>
+<script>
+    function checkWeather(){
+        let city= document.getElementById("city").value;
+        console.log(city)
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=d7462389c6e671076d5c5c0e5e252cf4`)
+    .then(function(response){
+        return response.json();
+    })
+    .then(function(response){
+        console.log("res:",response)
+    })
+    .catch(function(err){
+        console.log(err);
+    })
+}
+</script>
