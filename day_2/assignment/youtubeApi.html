@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+ #search{
+     margin-left: 200px;    
+    width: 30%;
+    height: 30px;
+    padding: 10px 5px;
+    float: left;   
+    font: 'lucida sans', 'trebuchet MS', 'Tahoma';
+    border: 1px solid silver;
+    background: #fff;
+    outline: skyblue;  
+ }
+ button{
+   overflow: visible;
+    position: relative;
+   
+    border: 0;
+    padding: 0;
+    cursor: pointer;
+    height: 30px;
+    width: 110px;
+    font: 13px/40px 'lucida sans', 'trebuchet MS', 'Tahoma';
+    color: rgb(31, 29, 29);
+    text-transform: uppercase;
+    border: 1px solid silver;
+    border-left: none;
+    
+ }
+ #profile{
+     height: 25px;
+     width: 30px;
+     border-radius: 50%;
+     
+ }
+ #space{
+     margin-left: 300px;
+     
+ }
+ 
+ #logo{
+     width: 100px;
+     height: 40px;
+
+ }
+ #main{
+    margin-top: 0%;
+     float: left;
+     
+     width: 100%;
+     float: left;
+ }
+ #fly{
+     margin-left: 100px;
+     margin-top: -3%;
+     margin-bottom: 20px;
+ }
+ #results{
+     margin-left: 10%;
+     margin-top: 20px;
+ }
+    </style>
+</head>
+<body>
+    <div id="main">
+    
+    <img id="logo"
+        src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRG8S67-HXRBMePRNlkTYa9U3eQTdWU-vhvcM7YPRDqffAJylE7xtIYc_d4XYlqX7rRClc&usqp=CAU" />
+    
+        <div id="fly">
+        <input id="search" type="search" placeholder="search here">
+        <button onclick="getVideo()" class="material-icons">search</button>
+
+    <span class="material-icons">
+        keyboard_voice
+    </span>
+    <span id="space" class="material-icons">
+        video_call
+    </span>
+    <span class="material-icons">
+        apps
+    </span>
+    <span class="material-icons">
+        notifications
+    </span>
+    <img id="profile" src="https://yt3.ggpht.com/yti/APfAmoGVguhIcPCP503k9BwihTPpvzlzXLBI3LjODdvjgw=s88-c-k-c0x00ffffff-no-rj-mo">
+    </div>
+    </div>
+    <div id="results"></div>
+</body>
+</html>
+<script>
+let result= document.getElementById("results");
+    async function getVideo(){
+        result.innerHTML=null;
+        let channel= document.getElementById("search").value;
+        let data= await fetch(`https://youtube.googleapis.com/youtube/v3/search?q=${channel}&maxResults=20&regionCode=in&key=AIzaSyCgP8tm69dQdCiiqvcxTUygeuxBfni1LG0`)
+        let video = await data.json();
+        console.log(video);
+        let { items } = video;
+        items = items.filter((el) => {
+            return el.id.videoId != undefined;
+        });
+        items.forEach(({ id: { videoId } }) => {
+            console.log(videoId);
+            let div = document.createElement('div');
+            let div2 = document.createElement('div');
+            div2.setAttribute('class', 'detail2')
+            div.style.marginTop = "20px"
+            div.innerHTML = `<iframe width="300px" height="200px" src="https://youtube.com/embed/${videoId}" title="youTube"></iframe>`
+
+            result.append(div, div2);
+        })
+    }
+</script>
