@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            
+        }
+        #main{
+            width: 100%;
+            background-image: url(https://images.unsplash.com/photo-1607329988179-70ae5c169fac?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80);
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            text-align: center;
+        }
+        #main_div{
+            position: relative; 
+            margin: 0 auto ;
+            text-align: center;
+            justify-content: center;
+        }
+        #logo{
+            position: relative;
+        }
+        #main_div span{
+            position: absolute;
+            top: 22px;
+            left: 62%;
+            font-size: 15px;
+        }
+        input{
+            width: 30%;
+           padding: 5px;
+           margin: 15px;
+           height: 50px;
+           background-color: rgb(119, 110, 110);
+           outline: none;
+           border-radius: 15px;
+           border: hidden;
+        }
+        span{
+            height: 30px;
+            width: 30px;
+            border-radius: 15px;
+            background-color: yellow;
+        }
+        .material-icons{
+            color: black;
+        }
+        .stars img{
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            animation: star 4s ease-in 1s infinite reverse both running;
+        }
+        .stars{
+            display: none;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            position: absolute;
+            top: 0;
+        }
+        @keyframes star{
+            0%{
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+            10%{
+                transform: translateY(100vh);
+                opacity: 1;
+            }
+            100%{
+                transform: translateY(-80vh);
+                opacity: 0;
+            }
+
+        }
+        .stars img:nth-child(1){
+            animation-delay: 2s;
+        }
+        .stars img:nth-child(2){
+            animation-delay: 1s;
+        }
+        .stars img:nth-child(3){
+            animation-delay: 4s;
+        }
+        .stars img:nth-child(4){
+            animation-delay: 2s;
+        }
+        .stars img:nth-child(5){
+            animation-delay: 3s;
+        }
+        .stars img:nth-child(6){
+            animation-delay: 1s;
+        }
+        .stars img:nth-child(6){
+            animation-delay: 4s;
+        }
+
+        .stars img:nth-child(7){
+            animation-delay: 2s;
+        }
+        .stars img:nth-child(8){
+            animation-delay: 1s;
+        }
+        .stars img:nth-child(9){
+            animation-delay: 5s;
+        }
+        .stars img:nth-child(10){
+            animation-delay: 2s;
+        }
+        .stars img:nth-child(11){
+            animation-delay: 4s;
+        }
+        .stars img:nth-child(12){
+            animation-delay: 5s;
+        }
+        .stars img:nth-child(13){
+            animation-delay: 3s;
+        }
+        .stars img:nth-child(14){
+            animation-delay: 2s;
+        }
+        #show_results{
+         width: 30%;
+         margin-left: 35%;
+         
+        }
+        .para{
+            color: white;
+            text-align: left;
+            background-color: rgb(119, 110, 110);
+            font-size: xx-large;
+            font-family: sans-serif;
+            border-bottom: 1px solid black;
+            border-radius: 10px ;
+            padding-left: 10px;
+
+        }
+        .para:hover{
+            color: yellow;
+        }
+    </style>
+</head>
+<body>
+    <div>
+    <div class="stars">
+        <img src="https://ak.picdn.net/shutterstock/videos/21358705/thumb/10.jpg">
+        <img src="https://ak.picdn.net/shutterstock/videos/21358705/thumb/10.jpg">
+        <img src="https://ak.picdn.net/shutterstock/videos/21358705/thumb/10.jpg">
+        <img src="https://ak.picdn.net/shutterstock/videos/21358705/thumb/10.jpg">
+        <img src="https://ak.picdn.net/shutterstock/videos/21358705/thumb/10.jpg">
+        <img src="https://ak.picdn.net/shutterstock/videos/21358705/thumb/10.jpg">
+        <img src="https://ak.picdn.net/shutterstock/videos/21358705/thumb/10.jpg">
+        <img src="https://ak.picdn.net/shutterstock/videos/21358705/thumb/10.jpg">
+        <img src="https://ak.picdn.net/shutterstock/videos/21358705/thumb/10.jpg">
+        <img src="https://ak.picdn.net/shutterstock/videos/21358705/thumb/10.jpg">
+        <img src="https://ak.picdn.net/shutterstock/videos/21358705/thumb/10.jpg">
+        <img src="https://ak.picdn.net/shutterstock/videos/21358705/thumb/10.jpg">
+        <img src="https://ak.picdn.net/shutterstock/videos/21358705/thumb/10.jpg">
+        <img src="https://ak.picdn.net/shutterstock/videos/21358705/thumb/10.jpg">
+    </div>
+    
+    <div id="main">
+        <img id="logo" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTg8Hmrqco9q0EkaAhTM7q264uK4NKt3UApsA&usqp=CAU">
+        <div id="main_div">
+           <span class="material-icons">search</span>
+        <input id="search" type="search" oninput="debounce(main,1000)" placeholder="search character">
+        <div id="show_results"></div>
+        </div>
+        
+       
+    </div>
+</body>
+</html>
+<script>
+    var timerId;
+    let show_results= document.getElementById("show_results");
+    async function resultFunc(name){
+        //let name= document.getElementById("search").value;
+        let data= await fetch(`https://swapi.dev/api/people/?search=${name}`);
+        let op= await data.json();
+        //console.log('data:',op.results)
+        return op.results;
+    }
+    function appendMovies(movie){
+        
+        show_results.innerHTML=null;
+        if(movie.length==0){
+            let p1=document.createElement('p');
+            p1.setAttribute("class", "para");
+            p1.innerText="No characters Found!";
+            show_results.append(p1);
+        }else{
+        movie.forEach(({ name, eye_color, gender, hair_color, height, mass, skin_color})=>{
+        let p=document.createElement("p");
+        
+        p.innerText=name;
+        p.setAttribute("class","para");
+        
+        p.addEventListener("click",()=>{
+            alert(name);
+            let obj={
+                name,
+                gender,
+                eye_color,
+                hair_color, 
+                height, 
+                mass, 
+                skin_color
+            }
+            let detail= JSON.stringify(obj);
+            localStorage.setItem("data",detail);
+            window.location.href="details.html";
+        })
+        
+        show_results.append(p);
+        })
+    }
+    }
+    async function main() {
+            let name = document.getElementById("search").value;
+            if (name.length < 2) {
+                //searchMovie(name);
+                return false;
+            }
+            let movies = await resultFunc(name);
+            if (movies == undefined) {
+                return false;
+            }
+            console.log("movies:",movies)
+            appendMovies(movies);
+        }
+       function debounce(func, delay) {
+            if (timerId) {
+                clearTimeout(timerId);
+            }
+            timerId = setTimeout(() => {
+                func();
+            }, delay);
+
+        }
+</script>

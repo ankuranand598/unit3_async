@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            background-image: url(https://images.unsplash.com/photo-1607329988179-70ae5c169fac?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80);
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            text-align: center;
+        }
+        #main{
+            text-align: center;
+            justify-content: center;
+            margin-left:35%;
+            margin-top: 10px;
+        }
+        #child{
+            width: 50%;
+            height: 600px;
+            display: grid;
+            grid-template-columns: 40% 40%;
+            grid-gap: 5%;
+        }
+        p{
+            text-align: center;
+            text-decoration: underline yellow;
+            color: yellow;
+            font-size: xx-large;
+            border-radius: 10px;
+        }
+        p:hover{
+            color: yellowgreen;
+
+        }
+        #child:hover{
+            border: 2px solid yellowgreen;
+        }
+        button{
+            height: 50px;
+            width: 200px;
+            border-radius: 25px;
+            outline: none;
+            margin-left: -150px;
+            background-color: yellow;
+        }
+        button:hover{
+            text-decoration: underline black;
+        }
+    </style>
+</head>
+<body>
+    <div id="main">
+        
+        <div id="child">
+            <div style="clear: both;"></div>
+            <div id="back">
+                <button onclick="goBack()">Go Back</button>
+            </div>
+        </div>
+        
+        
+    </div>
+</body>
+</html>
+<script>
+    let child=document.getElementById("child")
+    let detail= localStorage.getItem("data")
+let obj= JSON.parse(detail);
+console.log(obj)
+
+let a=document.createElement('p');
+a.innerText='Name:';
+    let b = document.createElement('p');
+    b.innerText = 'Gender:';
+    let c = document.createElement('p');
+        c.innerText = 'Eye-color:';
+        let d = document.createElement('p');
+            d.innerText = 'Hair-color:';
+            let e = document.createElement('p');
+                e.innerText = 'Mass:';
+                let f = document.createElement('p');
+                    f.innerText = 'Height:';
+                    let g = document.createElement('p');
+                        g.innerText = 'Skin-color:';
+  let p1 = document.createElement('p');
+    p1.innerHTML = obj.name;                  
+    let p2 = document.createElement('p');
+    p2.innerHTML = obj.gender;
+    let p3 = document.createElement('p');
+        p3.innerHTML = obj.eye_color;
+        let p4 = document.createElement('p');
+            p4.innerHTML = obj.hair_color;
+            let p5 = document.createElement('p');
+                p5.innerHTML = obj.mass;
+                let p6 = document.createElement('p');
+                    p6.innerHTML = obj.height;
+                    let p7 = document.createElement('p');
+                        p7.innerHTML = obj.skin_color;
+child.append(a,p1,b,p2,c,p3,d,p4,e,p5,f,p6,g,p7);
+function goBack(){
+    localStorage.clear();
+    window.location.href="starWarsApi.html"
+}
+</script>
