@@ -64,4 +64,4 @@ function runProgram(input) {
       runProgram(read);
       process.exit(0);
     });
-  }
+}
