@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Latest</title>
+        <style>
+            * {
+                margin: 0;
+                padding: 0;
+            }
+        
+            #main {
+                display: flex;
+                justify-content: space-between;
+                margin: 20px;
+            }
+        
+            #options {
+        
+                display: flex;
+                justify-content: space-between;
+            }
+        
+            #options>h3 {
+                padding-left: 40px;
+                padding-right: 40px;
+            }
+        
+            #details {
+                display: flex;
+                border: 1px solid black;
+            }
+        
+            #login {
+                border: 1px solid black;
+                width: 20%;
+            }
+
+
+            #res1{
+                display: grid;
+                grid-gap: 5%;
+                grid-template-columns: repeat(4,20%);
+                margin-left: 5%;
+            }
+            img{
+                width: 100%;
+                height: 150px;
+                margin-top:10px ;
+            }
+        </style>
+</head>
+<body>
+    <div id="res1"></div>
+</body>
+</html>
+<script type="module">
+    import navbar from "./components/navbar.js"
+    let div=document.createElement('div')
+    div.innerHTML=navbar()
+    document.body.prepend(div);
+    import {append,getdata} from "./scripts/getData.js"
+    let letter='abcdefghijklmnopqrstuvwxyz';
+    getdata(`http://www.themealdb.com/api/json/v1/1/search.php?f=${letter[Math.floor(Math.random() * 25)]}`).then((res)=>{
+        console.log('res:',res);
+    
+    let place=document.getElementById('res1')
+    append(res,place);
+    })
+</script>

@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+*{
+    margin: 0;
+    padding: 0;
+}
+
+#main{
+    display: flex;
+    justify-content: space-between;
+}
+#options{
+    
+     display: flex;
+    justify-content: space-between; 
+}
+#options > h3{
+   padding-left: 40px;
+   padding-right: 40px;
+}
+#details{
+    display: flex;
+     float: left;
+}
+#login{
+    float: left;
+    width: 200px;
+    height: 100vh;
+   
+}
+#res{
+    padding: 50px;
+    text-align: center;
+}
+#showRes{
+    height: 150px;
+    width: 200px;
+    scroll-behavior: smooth;
+    scroll-margin-bottom: auto;
+   overflow: scroll;
+  margin-left: 42%;
+}
+img{
+    height: 200px;
+    width: 200px;
+    margin-top: 20px;
+}
+#showData{
+    float: left;
+}
+img+p{
+    text-decoration: underline;
+    color: palevioletred;
+    font-size: larger;
+}
+    </style>
+</head>
+<body>
+   <div id="check"></div>
+   <div id="res">
+<input placeholder="Search food" oninput="debouncing(main,1000)" type="search" id="search">
+<div id="showRes"></div>
+<div id="showData"></div>
+   </div>
+</body>
+</html>
+<script type="module">
+    import navbar from "./components/navbar.js"
+    document.getElementById('check').innerHTML=navbar()
+   
+</script>
+<script>
+    var timerId;
+    let showRes=document.getElementById('showRes');
+    let showData = document.getElementById('showData');
+    async function getFood(name){
+        let res = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${name}`);
+        let data= await res.json();
+        console.log('data:',data);
+        return data.meals;
+    }
+    function appendData(data){
+        showRes.innerHTML=null;
+        
+        data.forEach(({ strMeal, strMealThumb, strInstructions})=>{
+         let p= document.createElement('p');
+         p.innerText=strMeal;
+          let obj = {
+                a: strMeal,
+                b: strMealThumb,
+                c: strInstructions
+            };
+            console.log(obj)
+         p.addEventListener("click",() => {
+             console.log(strMeal, strMealThumb, strInstructions);
+             showData.innerHTML = null;
+            let p1=document.createElement('p');
+            p1.innerText=strMeal;
+          
+            let img=document.createElement('img');
+            img.src= strMealThumb;
+            let p2=document.createElement('p');
+            p2.innerText=strInstructions;
+            showData.append(img,p1,p2);
+         })
+         showRes.append(p)
+        })
+    }
+    async function main(){
+        let name= document.getElementById('search').value;
+        if(name.length<3){
+            return false;
+        }
+        let op= await getFood(name);
+        if(op==undefined){
+            return false
+        }
+        appendData(op);
+    }
+    //getFood()
+       function debouncing(func,delay){
+            if (timerId) {
+               clearTimeout(timerId);
+           }
+           timerId = setTimeout(() => {
+               func();
+           }, delay);
+       }
+</script>
